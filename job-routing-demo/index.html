@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Job Application Routing Demo</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="hero">
+        <div>
+          <p class="eyebrow">Frontend-Only Demo</p>
+          <h1>Job Applications Route to the Job Creator</h1>
+          <p class="hero-copy">
+            Jobs store <code>createdBy</code>. Applications store
+            <code>receiverId = job.createdBy</code>. Dashboards only show
+            applications where <code>receiverId === currentUser.id</code>.
+          </p>
+        </div>
+        <div class="hero-actions">
+          <button id="seedButton" class="secondary-btn" type="button">Reset Demo Data</button>
+          <button id="clearApplicationsButton" class="ghost-btn" type="button">
+            Clear Applications
+          </button>
+        </div>
+      </header>
+
+      <main class="layout">
+        <section class="panel sticky-panel">
+          <div class="panel-heading">
+            <h2>Current Session</h2>
+            <p>Switch users to test admin-created jobs and user-created jobs.</p>
+          </div>
+
+          <label class="field">
+            <span>Current User</span>
+            <select id="currentUserSelect"></select>
+          </label>
+
+          <div id="currentUserCard" class="identity-card"></div>
+
+          <div class="logic-card">
+            <h3>Routing Rule</h3>
+            <ol>
+              <li>Fetch the job using <code>jobId</code>.</li>
+              <li>Read <code>job.createdBy</code>.</li>
+              <li>Save <code>receiverId = job.createdBy</code>.</li>
+              <li>Show only matching applications in the dashboard.</li>
+            </ol>
+          </div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-heading">
+            <h2>Create Job</h2>
+            <p>Every new job stores creator identity in localStorage.</p>
+          </div>
+
+          <form id="jobForm" class="form-grid">
+            <label class="field">
+              <span>Job Title</span>
+              <input id="jobTitle" name="title" type="text" placeholder="Frontend Developer" required />
+            </label>
+
+            <label class="field">
+              <span>Company</span>
+              <input id="jobCompany" name="company" type="text" placeholder="ABC" required />
+            </label>
+
+            <button class="primary-btn full-width" type="submit">Create Job</button>
+          </form>
+
+          <div class="data-preview">
+            <h3>Created Job Shape</h3>
+            <pre>{
+id: "job_1",
+title: "Frontend Developer",
+company: "ABC",
+createdBy: "user1",
+creatorName: "Prajwal",
+creatorRole: "user"
+}</pre>
+          </div>
+        </section>
+
+        <section class="panel full-span">
+          <div class="panel-heading">
+            <h2>Jobs</h2>
+            <p>Apply to jobs created by someone else. Own jobs cannot be applied to.</p>
+          </div>
+          <div id="jobsList" class="card-grid"></div>
+        </section>
+
+        <section class="panel full-span">
+          <div class="panel-heading">
+            <h2>My Received Applications</h2>
+            <p>
+              Dashboard filter:
+              <code>receiverId === currentUser.id</code>
+            </p>
+          </div>
+          <div id="applicationsList" class="card-grid"></div>
+        </section>
+
+        <section class="panel full-span">
+          <div class="panel-heading">
+            <h2>All Stored Data</h2>
+            <p>This section makes the data flow visible for testing.</p>
+          </div>
+
+          <div class="storage-grid">
+            <div class="data-preview">
+              <h3>Users</h3>
+              <pre id="usersPreview"></pre>
+            </div>
+            <div class="data-preview">
+              <h3>Jobs</h3>
+              <pre id="jobsPreview"></pre>
+            </div>
+            <div class="data-preview">
+              <h3>Applications</h3>
+              <pre id="applicationsPreview"></pre>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <template id="jobCardTemplate">
+      <article class="card">
+        <div class="card-topline">
+          <span class="badge"></span>
+          <span class="creator-meta"></span>
+        </div>
+        <h3 class="job-title"></h3>
+        <p class="company-name"></p>
+        <div class="meta-list"></div>
+        <button class="primary-btn apply-btn" type="button">Apply</button>
+      </article>
+    </template>
+
+    <template id="applicationCardTemplate">
+      <article class="card">
+        <div class="card-topline">
+          <span class="badge status-badge"></span>
+          <span class="receiver-meta"></span>
+        </div>
+        <h3 class="job-title"></h3>
+        <div class="meta-list"></div>
+      </article>
+    </template>
+
+    <script src="./script.js"></script>
+  </body>
+</html>

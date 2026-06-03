@@ -1,4 +1,5 @@
 # NAVAVERSE
+<<<<<<< HEAD
 
 NAVAVERSE is a full-stack MERN platform for blogs, jobs, events, courses, startups, user profiles, admin approvals, registrations, comments, subscriptions, and AI-assisted blog generation.
 
@@ -134,3 +135,6 @@ Backend: `https://navaverse-api.onrender.com`
 ## Contributors
 
 - NAVAVERSE Team
+=======
+NAVAVERSE is an AI-powered MERN stack platform that brings together blogs, jobs, events, courses, and startups into one connected ecosystem. Designed for learners, developers, creators, and founders, NAVAVERSE enables users to build, learn, collaborate, and launch their careers through a modern and interactive digital experience.
+>>>>>>> 93c9d61bfcfa9c0cb09223721b68f593f6d9d5af
